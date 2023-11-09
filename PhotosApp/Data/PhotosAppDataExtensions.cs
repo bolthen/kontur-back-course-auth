@@ -158,7 +158,7 @@ namespace PhotosApp.Data
                     UserName = "vicky@gmail.com",
                     Email = "vicky@gmail.com"
                 };
-                await userManager.RegisterUserIfNotExists(user, "Pass!2");
+                await userManager.RegisterUserIfNotExists(user, "qweqwe");
             }
 
             {
@@ -168,7 +168,7 @@ namespace PhotosApp.Data
                     UserName = "cristina@gmail.com",
                     Email = "cristina@gmail.com"
                 };
-                await userManager.RegisterUserIfNotExists(user, "Pass!2");
+                await userManager.RegisterUserIfNotExists(user, "qweqwe");
             }
 
             {
@@ -178,7 +178,7 @@ namespace PhotosApp.Data
                     UserName = "dev@gmail.com",
                     Email = "dev@gmail.com"
                 };
-                await userManager.RegisterUserIfNotExists(user, "Pass!2");
+                await userManager.RegisterUserIfNotExists(user, "qweqwe");
             }
         }
 

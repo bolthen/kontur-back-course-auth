@@ -40,13 +40,7 @@ namespace IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute("default", "{controller=Photos}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
-
+    
             // uncomment if you want to add MVC
             //app.UseStaticFiles();
 
