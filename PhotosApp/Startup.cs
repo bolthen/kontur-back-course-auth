@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,7 @@ using PhotosApp.Clients.Models;
 using PhotosApp.Data;
 using PhotosApp.Models;
 using PhotosApp.Services;
+using PhotosApp.Services.Authorization;
 using Serilog;
 
 namespace PhotosApp
@@ -52,6 +54,7 @@ namespace PhotosApp
 
             services.AddScoped<IPhotosRepository, LocalPhotosRepository>();
             services.AddScoped<IPasswordHasher<PhotosAppUser>, SimplePasswordHasher<PhotosAppUser>>();
+            services.AddScoped<IAuthorizationHandler, MustOwnPhotoHandler>();
             
             services.AddAutoMapper(cfg =>
             {

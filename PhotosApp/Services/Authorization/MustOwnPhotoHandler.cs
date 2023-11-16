@@ -30,6 +30,7 @@ namespace PhotosApp.Services.Authorization
             var routeData = httpContext?.GetRouteData();
 
             // NOTE: Использовать, если нужное условие выполняется
+            
             // context.Succeed(requirement);
 
             // NOTE: Использовать, если нужное условие не выполняется
