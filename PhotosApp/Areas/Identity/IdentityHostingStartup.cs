@@ -2,9 +2,11 @@ using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PhotosApp.Areas.Identity.Data;
 using PhotosApp.Services;
 using PhotosApp.Services.Authorization;
@@ -28,6 +30,24 @@ namespace PhotosApp.Areas.Identity
                     options.UseSqlite(
                         context.Configuration.GetConnectionString("TicketsDbContextConnection")));
 
+                services.AddTransient<IEmailSender, SimpleEmailSender>(serviceProvider =>
+                    new SimpleEmailSender(
+                        serviceProvider.GetRequiredService<ILogger<SimpleEmailSender>>(),
+                        serviceProvider.GetRequiredService<IWebHostEnvironment>(),
+                        context.Configuration["SimpleEmailSender:Host"],
+                        context.Configuration.GetValue<int>("SimpleEmailSender:Port"),
+                        context.Configuration.GetValue<bool>("SimpleEmailSender:EnableSSL"),
+                        context.Configuration["SimpleEmailSender:UserName"],
+                        context.Configuration["SimpleEmailSender:Password"]
+                    ));
+                
+                services.AddAuthentication()
+                    .AddGoogle("Google", options =>
+                    {
+                        options.ClientId = context.Configuration["Authentication:Google:ClientId"];
+                        options.ClientSecret = context.Configuration["Authentication:Google:ClientSecret"];
+                    });
+                
                 services.Configure<IdentityOptions>(options =>
                 {
                     options.Password.RequireDigit = false;
